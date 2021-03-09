@@ -52,14 +52,14 @@ class MailSentWith extends MailConstraintBase
         $emails = $this->getEmails();
         foreach ($emails as $email) {
             $value = $this->getValue($email);
+            if ($value === $other) {
+                return true;
+            }
             if (
                 !is_array($other)
                 && in_array($this->method, ['to', 'cc', 'bcc', 'from'])
                 && array_key_exists($other, $value)
             ) {
-                return true;
-            }
-            if ($value === $other) {
                 return true;
             }
         }
